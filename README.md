@@ -31,27 +31,27 @@ Additionally, the VolumesApp target contains a directory `AudioSignalGenerator` 
 This is adapted from Apple's sample code here: https://developer.apple.com/documentation/avfaudio/building-a-signal-generator
 The signal generating kernel provides the sample values for the triangle waveform to the AVAudioSourceNode's rendering block.
 
-    ----------------                             -------------------------- 
-    |   VolumesApp |                             |     AppCoordinator     |  
-    |______________|                             |________________________|  
-           |                                        |                   | 1. the AppCoordinator receives events from the ARSceneCoordinator
-           V                                        |                   | 2. the AppCoordinator then transforms these events into actions called
- ----------------------                             |                   | on the AudioSynthesizerController.
- |   AppContentView   |                             |                   |
- |____________________|                             |                   |
-           |                                        |                   |
-           V                                        V                   V
- ----------------------  Gestures   -----------------------         ------------------------------            
- |   ARSceneView      | ----------> | ARSceneCoordinator  |         | AudioSynthesizerController |
- |____________________|             |_____________________|         |____________________________|
-           |                                                                     |
-           V                                                                     V
- ----------------------                                                ----------------------         
- | ARView(RealityKit) |                                                |   AVAudioEngine    |
- |____________________|                                                |____________________|
+        ----------------                             -------------------------- 
+        |   VolumesApp |                             |     AppCoordinator     |  
+        |______________|                             |________________________|  
+               |                                        |                   | 1. the AppCoordinator receives events from the ARSceneCoordinator
+               V                                        |                   | 2. the AppCoordinator then transforms these events into actions called
+     ----------------------                             |                   | on the AudioSynthesizerController.
+     |   AppContentView   |                             |                   |
+     |____________________|                             |                   |
+               |                                        |                   |
+               V                                        V                   V
+     ----------------------  Gestures   -----------------------         ------------------------------            
+     |   ARSceneView      | ----------> | ARSceneCoordinator  |         | AudioSynthesizerController |
+     |____________________|             |_____________________|         |____________________________|
+               |                                                                     |
+               V                                                                     V
+     ----------------------                                                ----------------------         
+     | ARView(RealityKit) |                                                |   AVAudioEngine    |
+     |____________________|                                                |____________________|
 
 
-With this modularization, the ARScene feature and the AudioSynthesizer feature remain decoupled, promoting clean, testable API boundaries.
+With this modularization, the ARScene feature and the AudioSynthesizer feature remain decoupled, which promotes clean, testable API boundaries.
 Additionally, other components could be added to the app by interfacing with the AppCoordinator. 
 For example, the events from the ARScene could then drive a game engine while the game engine remains decoupled from the ARScene feature.
 
